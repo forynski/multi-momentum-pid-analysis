@@ -96,12 +96,7 @@ TabNet is a modern deep learning model specifically designed for tabular data. I
 #### Ensemble Model
 
 **Voting Scheme:**
-- Weighted averaging across three base models:  
-  \[
-  \text{Ensemble} = w_1 \cdot \text{XGBoost} + w_2 \cdot \text{DNN} + w_3 \cdot \text{TabNet}
-  \]
-  with \( w_1 + w_2 + w_3 = 1 \)
-
+- Weighted averaging across three base models: Ensemble = w₁ · XGBoost + w₂ · DNN + w₃ · TabNet  (with w₁ + w₂ + w₃ = 1)
 - Weight optimisation: Grid search over 3D simplex  
 - Selection criterion: Maximum ROC-AUC on test set  
 
