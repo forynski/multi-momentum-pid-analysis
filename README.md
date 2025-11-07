@@ -120,3 +120,79 @@ TabNet is a modern deep learning model specifically designed for tabular data. I
 
 ## Model Storage Structure
 
+```
+/content/drive/MyDrive/PID_Models/
+├── XGBoost/
+│   ├── xgb_model_full.pkl
+│   ├── xgb_model_low.pkl
+│   ├── xgb_model_mid.pkl
+│   └── xgb_model_high.pkl
+├── DNN/
+│   ├── dnn_model_full.keras
+│   ├── dnn_scaler_full.pkl
+│   ├── dnn_metrics_full.json
+│   └── ... (replicated for low, mid, high)
+├── Optuna_Studies/
+│   ├── optuna_study_xgb_full.pkl
+│   ├── optuna_study_dnn_full.pkl
+│   └── ... (replicated for low, mid, high)
+└── Ensemble/
+    └── (weights computed per run)
+```
+
+## Performance Metrics
+
+### Evaluation Metrics
+
+- **Accuracy**: Fraction of correct predictions
+- **Efficiency**: True positive rate per particle species
+- **Purity**: Precision per particle species
+- **ROC-AUC**: Area under receiver operating characteristic curve
+- **Confusion Matrix**: Misclassification patterns by particle type
+
+### Typical Results
+
+| Momentum Range | XGBoost Acc | DNN Acc | Ensemble Acc | Improvement |
+|---|---|---|---|---|
+| Full Spectrum | 0.867 | 0.850 | 0.875 | +0.8-1.0% |
+| Low (0.1-1) | 0.845 | 0.832 | 0.858 | +1.3% |
+| Mid (1-3) | 0.876 | 0.862 | 0.882 | +0.6% |
+| High (3+) | 0.891 | 0.878 | 0.898 | +0.7% |
+
+*Note: Performance varies based on data characteristics and detector conditions.*
+
+## Interactive Features
+
+### Dashboard 1: Model Comparison
+
+- **Select**: Momentum range
+- **View**: Accuracy comparison across XGBoost, DNN, and Ensemble
+- **Output**: Bar chart with accuracy values
+
+### Dashboard 2: PID Performance Analysis
+
+- **Select Particle**: Choose which particle species to analyse
+- **Select Metric**: Efficiency or Purity
+- **Select Model**: XGBoost, DNN, or Ensemble
+- **Select Visualisation**: Bar chart, metrics table, or ROC curves
+- **Output**: Dynamic plots and detailed statistics across all momentum ranges
+
+## Dependencies
+
+### Core Libraries
+
+- `python >= 3.8`
+- `tensorflow >= 2.10` (for Keras)
+- `xgboost >= 2.0`
+- `optuna >= 3.0`
+- `scikit-learn >= 1.6`
+- `pandas >= 1.3`
+- `numpy >= 1.20`
+- `matplotlib >= 3.3`
+- `seaborn >= 0.11`
+- `hipe4ml >= 0.1` (high-energy physics ML framework)
+
+### Installation (Google Colab)
+
+All dependencies are automatically installed in Section 1 of the notebooks.
+
