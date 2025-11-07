@@ -132,6 +132,11 @@ TabNet is a modern deep learning model specifically designed for tabular data. I
 │   ├── dnn_scaler_full.pkl
 │   ├── dnn_metrics_full.json
 │   └── ... (replicated for low, mid, high)
+├── TabNet/
+│   ├── tabnet_model_full.pkl
+│   ├── tabnet_model_low.pkl
+│   ├── tabnet_model_mid.pkl
+│   ├── tabnet_model_high.pkl
 ├── Optuna_Studies/
 │   ├── optuna_study_xgb_full.pkl
 │   ├── optuna_study_dnn_full.pkl
@@ -192,7 +197,7 @@ TabNet is a modern deep learning model specifically designed for tabular data. I
 - `seaborn >= 0.11`
 - `hipe4ml >= 0.1` (high-energy physics ML framework)
 
-### Installation (Google Colab)
+### Installation
 
 All dependencies are automatically installed in Section 1 of the notebooks.
 
