@@ -1,6 +1,6 @@
 # Multi-Momentum Particle Identification Analysis
 
-A comprehensive machine learning framework for particle identification (PID) in high-energy physics experiments using XGBoost, Deep Neural Networks (DNN), **TabNet**, and ensemble methods across multiple momentum ranges.
+A comprehensive machine learning framework for particle identification (PID) in high-energy physics experiments using XGBoost, Deep Neural Networks (DNN), TabNet, and ensemble methods across multiple momentum ranges.
 
 ## Overview
 
@@ -8,13 +8,12 @@ This repository implements advanced particle identification techniques with mome
 
 ### Key Features
 
-- **Triple Machine Learning Approaches**: Combines gradient boosting (XGBoost), deep learning (DNN), and **TabNet** for optimal performance  
+- **Triple Machine Learning Approaches**: Combines gradient boosting (XGBoost), deep learning (DNN), TabNet and LigthGBM for optimal performance  
 - **Ensemble Methods**: Weighted voting system that intelligently combines model predictions for enhanced accuracy  
-- **Automated Hyperparameter Optimisation**: Uses Optuna for all model families (XGBoost, DNN, TabNet)  
+- **Automated Hyperparameter Optimisation**: Uses Optuna for all model families (XGBoost, DNN, TabNet, LigthGBM)  
 - **Persistent Model Caching**: Trains once, loads instantly on subsequent runs  
 - **Multi-Momentum Analysis**: Separate models for full spectrum, low (0.1–1 GeV/c), mid (1–3 GeV/c), and high (3+ GeV/c) momentum ranges  
 - **Comprehensive Visualisations**: ROC curves, confusion matrices, output distributions, and feature importance analysis  
-- **Interactive Dashboards**: Explore model performance through dynamic, widget-based interfaces  
 
 ## Notebooks
 
