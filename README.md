@@ -1,16 +1,16 @@
 # Multi-Momentum Particle Identification Analysis
 
-A comprehensive machine learning framework for particle identification (PID) in high-energy physics experiments using XGBoost, Deep Neural Networks (DNN), TabNet, and ensemble methods across multiple momentum ranges.
+A comprehensive machine learning framework for particle identification (PID) in high-energy physics experiments using XGBoost, Deep Neural Networks (DNN), and ensemble methods across multiple momentum ranges.
 
 ## Overview
 
-This repository implements advanced particle identification techniques with momentum-dependent classification models. The analysis covers five particle species (Pion, Kaon, Proton, Electron, and Deuteron) across four distinct momentum ranges, enabling detailed investigation of detector performance characteristics.
+This repository implements advanced particle identification techniques with momentum-dependent classification models. The analysis covers five particle species (Pion, Kaon, Proton, and Electron) across four distinct momentum ranges, enabling detailed investigation of detector performance characteristics.
 
 ### Key Features
 
-- **Triple Machine Learning Approaches**: Combines gradient boosting (XGBoost), deep learning (DNN), TabNet and LigthGBM for optimal performance  
+- **Triple Machine Learning Approaches**: Combines gradient boosting (XGBoost), deep learning (DNN) and LigthGBM for optimal performance  
 - **Ensemble Methods**: Weighted voting system that intelligently combines model predictions for enhanced accuracy  
-- **Automated Hyperparameter Optimisation**: Uses Optuna for all model families (XGBoost, DNN, TabNet, LigthGBM)  
+- **Automated Hyperparameter Optimisation**: Uses Optuna for all model families (XGBoost, DNN, LigthGBM)  
 - **Persistent Model Caching**: Trains once, loads instantly on subsequent runs  
 - **Multi-Momentum Analysis**: Separate models for full spectrum, low (0.1–1 GeV/c), mid (1–3 GeV/c), and high (3+ GeV/c) momentum ranges  
 - **Comprehensive Visualisations**: ROC curves, confusion matrices, output distributions, and feature importance analysis  
@@ -27,18 +27,14 @@ The primary analysis notebook featuring an ensemble approach combining multiple 
 - **Enhanced comparison plots**: Now include TabNet performance metrics  
 
 **Advantages:**
-- Combines strengths of XGBoost, DNN, and TabNet models  
+- Combines strengths of XGBoost, DNN, and LightGBM models  
 - Automatic hyperparameter tuning for all architectures  
 - Typically achieves 7–14% performance improvement over single models  
 - Complete model persistence and reusability  
 
-### 2. `multi_momentum_pid_tabnet.ipynb` (TabNet-Only)
-
-Dedicated notebook implementing TabNet for momentum-dependent PID. Provides both interpretability and strong generalisation on tabular detector data.
-
 **Contents:**
 - Data preprocessing and feature normalisation  
-- Optuna hyperparameter optimisation for TabNet  
+- Optuna hyperparameter optimisation  
 - Training and evaluation for each momentum range  
 - Feature mask visualisation for interpretability  
 
@@ -61,7 +57,7 @@ Dedicated notebook implementing TabNet for momentum-dependent PID. Provides both
 
 *(unchanged – see original description)*
 
-#### **TabNet (Deep Tabular Learning Architecture)**
+#### **LightGBM**
 
 **Overview:**
 TabNet is a modern deep learning model specifically designed for tabular data. It uses sequential attention to select relevant features at each decision step, combining interpretability and efficiency.
@@ -95,21 +91,16 @@ TabNet is a modern deep learning model specifically designed for tabular data. I
 #### Ensemble Model
 
 **Voting Scheme:**
-- Weighted averaging across three base models: Ensemble = w₁ · XGBoost + w₂ · DNN + w₃ · TabNet  (with w₁ + w₂ + w₃ = 1)
+- Weighted averaging across three base models: Ensemble = w₁ · XGBoost + w₂ · DNN + w₃ (with w₁ + w₂ + w₃ = 1)
 - Weight optimisation: Grid search over 3D simplex  
 - Selection criterion: Maximum ROC-AUC on test set  
-
-**Expected Performance:**
-- 3–7% improvement from TabNet alone over DNN  
-- 6–15% improvement for full ensemble vs. best single model  
-- Most consistent results observed in mid and high momentum ranges  
 
 ---
 
 ## Hyperparameter Optimisation
 
 **Optuna Framework (Extended):**
-- Optimises XGBoost, DNN, and TabNet independently  
+- Optimises XGBoost and DNN, independently  
 - Sampler: Tree-structured Parzen Estimator (TPE)  
 - Trials: 20 per model type and momentum range  
 - Total optimisation time: ~90–120 minutes per full run  
@@ -131,11 +122,11 @@ TabNet is a modern deep learning model specifically designed for tabular data. I
 │   ├── dnn_scaler_full.pkl
 │   ├── dnn_metrics_full.json
 │   └── ... (replicated for low, mid, high)
-├── TabNet/
-│   ├── tabnet_model_full.pkl
-│   ├── tabnet_model_low.pkl
-│   ├── tabnet_model_mid.pkl
-│   ├── tabnet_model_high.pkl
+├── LightGBM/
+│   ├── LightGBM_full.pkl
+│   ├── LightGBM_low.pkl
+│   ├── LightGBM_mid.pkl
+│   ├── LightGBM_high.pkl
 ├── Optuna_Studies/
 │   ├── optuna_study_xgb_full.pkl
 │   ├── optuna_study_dnn_full.pkl
@@ -170,14 +161,14 @@ TabNet is a modern deep learning model specifically designed for tabular data. I
 ### Dashboard 1: Model Comparison
 
 - **Select**: Momentum range
-- **View**: Accuracy comparison across XGBoost, DNN, and Ensemble
+- **View**: Accuracy comparison across XGBoost, DNN, LightGBM and Ensemble
 - **Output**: Bar chart with accuracy values
 
 ### Dashboard 2: PID Performance Analysis
 
 - **Select Particle**: Choose which particle species to analyse
 - **Select Metric**: Efficiency or Purity
-- **Select Model**: XGBoost, DNN, or Ensemble
+- **Select Model**: XGBoost, DNN, LightGBM or Ensemble
 - **Select Visualisation**: Bar chart, metrics table, or ROC curves
 - **Output**: Dynamic plots and detailed statistics across all momentum ranges
 
