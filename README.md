@@ -52,7 +52,7 @@ The primary analysis notebook featuring an ensemble approach combining multiple 
 ### XGBoost (Gradient Boosting Decision Trees)
 
 **Overview:**  
-XGBoost is an optimized distributed gradient boosting library designed to be highly efficient, flexible, and portable. It implements machine learning algorithms under the Gradient Boosting framework, delivering state-of-the-art performance on structured data.
+XGBoost is an optimised distributed gradient boosting library designed to be highly efficient, flexible, and portable. It implements machine learning algorithms under the Gradient Boosting framework, delivering state-of-the-art performance on structured data.
 
 **Architecture Highlights:**
 - Ensemble of decision trees built sequentially to correct previous errors  
@@ -96,7 +96,7 @@ The DNN is a fully connected feedforward neural network designed to capture nonl
 **Configuration:**
 - Hidden layer sizes: 128–512 units  
 - Activation: ReLU or GELU  
-- Optimizer: Adam or AdamW (learning rate: 1e-4–1e-3)  
+- Optimiser: Adam or AdamW (learning rate: 1e-4–1e-3)  
 - Batch size: 256–1024  
 - Scheduler: Cosine annealing or step decay  
 
