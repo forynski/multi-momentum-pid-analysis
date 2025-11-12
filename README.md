@@ -45,48 +45,106 @@ The primary analysis notebook featuring an ensemble approach combining multiple 
 
 ---
 
-## Technical Architecture
+# Technical Architecture
 
-### Machine Learning Models
+## Machine Learning Models
 
-#### XGBoost (Gradient Boosting Decision Trees)
+### XGBoost (Gradient Boosting Decision Trees)
 
-*(unchanged – see original description)*
-
-#### Deep Neural Network (DNN)
-
-*(unchanged – see original description)*
-
-#### **LightGBM**
-
-**Overview:**
-TabNet is a modern deep learning model specifically designed for tabular data. It uses sequential attention to select relevant features at each decision step, combining interpretability and efficiency.
+**Overview:**  
+XGBoost is an optimized distributed gradient boosting library designed to be highly efficient, flexible, and portable. It implements machine learning algorithms under the Gradient Boosting framework, delivering state-of-the-art performance on structured data.
 
 **Architecture Highlights:**
-- Feature transformer and attentive transformer blocks  
-- Sparse attention masks for feature selection  
-- Shared and step-dependent transformations  
+- Ensemble of decision trees built sequentially to correct previous errors  
+- Regularization terms (L1 and L2) to control overfitting  
+- Weighted quantile sketch for approximate tree learning  
+- Parallelized tree construction for scalability  
+
+**Configuration:**
+- Number of estimators: 200–1000  
+- Maximum depth: 4–10  
+- Learning rate (η): 0.01–0.3  
+- Subsample: 0.7–1.0  
+- Column sample by tree: 0.6–1.0  
+- Objective: multi-class softmax  
+- Evaluation metric: log-loss or accuracy  
+
+**Training:**
+- Early stopping based on validation loss (patience: 20)  
+- Regularization parameters tuned via grid or Bayesian search  
+- GPU acceleration via CUDA support  
+
+**Advantages:**
+- High accuracy on tabular data  
+- Excellent handling of missing values  
+- Strong regularization to prevent overfitting  
+- Proven robustness in large-scale structured datasets  
+
+---
+
+### Deep Neural Network (DNN)
+
+**Overview:**  
+The DNN is a fully connected feedforward neural network designed to capture nonlinear relationships in high-dimensional feature spaces, particularly effective when data exhibits complex correlations.
+
+**Architecture Highlights:**
+- Input normalization and embedding layers for heterogeneous inputs  
+- Multiple hidden layers (3–6) with ReLU or GELU activations  
+- Batch normalization and dropout for regularization  
 - Output softmax layer for multi-class classification  
 
 **Configuration:**
-- Decision steps: 3–7  
-- Feature transformer dim: 32–128  
-- Relaxation parameter (`gamma`): 1.2–2.0  
-- Optimiser: Adam with learning rate 1e-4–1e-2  
-- Batch size: 512  
-- Scheduler: Cosine decay learning rate  
+- Hidden layer sizes: 128–512 units  
+- Activation: ReLU or GELU  
+- Optimizer: Adam or AdamW (learning rate: 1e-4–1e-3)  
+- Batch size: 256–1024  
+- Scheduler: Cosine annealing or step decay  
 
 **Training:**
-- Early stopping based on validation loss (patience: 15)  
 - Loss: categorical cross-entropy  
-- Regularisation: sparse loss weighting (λ_sparse = 1e-4–1e-3)  
-- GPU acceleration supported via PyTorch  
+- Early stopping based on validation accuracy  
+- Weight decay and dropout (0.2–0.5) for overfitting prevention  
+- GPU acceleration supported via PyTorch or TensorFlow  
 
 **Advantages:**
-- Superior interpretability via feature masks  
-- Handles heterogeneous detector inputs effectively  
-- Learns feature hierarchies automatically  
-- Often outperforms DNN on structured, physics-derived data  
+- High representational capacity for nonlinear feature interactions  
+- Adaptable to mixed feature types  
+- Effective for high-dimensional structured or semi-structured data  
+- Can be combined with autoencoders or feature extractors for pretraining  
+
+---
+
+### LightGBM
+
+**Overview:**  
+LightGBM is a gradient boosting framework that uses tree-based learning algorithms, designed for efficiency and scalability on large datasets. It supports histogram-based algorithms and leaf-wise tree growth for faster convergence.
+
+**Architecture Highlights:**
+- Leaf-wise tree growth with depth constraints  
+- Histogram-based split finding  
+- Gradient-based one-side sampling (GOSS)  
+- Exclusive feature bundling (EFB) to reduce dimensionality  
+
+**Configuration:**
+- Number of leaves: 31–255  
+- Max depth: -1 (unlimited) or tuned per dataset  
+- Learning rate: 0.01–0.2  
+- Feature fraction: 0.6–1.0  
+- Bagging fraction: 0.6–1.0  
+- Objective: multi-class classification  
+- Metric: multi-logloss or accuracy  
+
+**Training:**
+- Early stopping with validation monitoring  
+- Regularization via L1/L2 and min data in leaf  
+- GPU support for faster training  
+
+**Advantages:**
+- High-speed training with low memory footprint  
+- Strong performance on large tabular datasets  
+- Supports categorical features natively  
+- Excellent scalability and distributed training
+
 
 #### Ensemble Model
 
